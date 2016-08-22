@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{71FE5B12-BE7B-48E3-8B1C-6C4EFF26E92E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SimolTest</RootNamespace>
+    <AssemblyName>SimolTest</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>1607</NoWarn>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>618</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK, Version=1.0.3.0, Culture=neutral, PublicKeyToken=498aea76c1205a29, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\AWSSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Coditate.Common, Version=2009.3.14.460, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Coditate.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Coditate.TestSupport, Version=2009.3.14.460, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Coditate.TestSupport.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.5.0.2, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Simol\Simol.csproj">
+      <Project>{EC218618-2C5D-4DCE-BA44-5270C36651AF}</Project>
+      <Name>Savant</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Async\AsyncExtensionsTest.cs" />
+    <Compile Include="Cache\SimpleCacheTest.cs" />
+    <Compile Include="AttributeMappingTest.cs" />
+    <Compile Include="Consistency\WriteMonitorTest.cs" />
+    <Compile Include="Consistency\ReliableWriteScopeTest.cs" />
+    <Compile Include="Consistency\VersioningUtilsTest.cs" />
+    <Compile Include="ConstraintAttributeTest.cs" />
+    <Compile Include="SelectUtilsTest.cs" />
+    <Compile Include="Core\ConsistentSimpleDBTest.cs" />
+    <Compile Include="Core\SpanUtilsTest.cs" />
+    <Compile Include="Core\DecoratingSimpleDBTest.cs" />
+    <Compile Include="Core\ValuesItemMappingTest.cs" />
+    <Compile Include="Data\SimpleDBRequestFormatterTest.cs" />
+    <Compile Include="Data\IndexStateTest.cs" />
+    <Compile Include="Formatters\TimeSpanFormatterTest.cs" />
+    <Compile Include="Formatters\GuidFormatterTest.cs" />
+    <Compile Include="Formatters\DateFormatterTest.cs" />
+    <Compile Include="Indexing\DomainCrawlerTest.cs" />
+    <Compile Include="Indexing\IndexBuilderTest.cs" />
+    <Compile Include="Indexing\LuceneIndexerTest.cs" />
+    <Compile Include="NUnitSetup.cs" />
+    <Compile Include="PropertyValuesTest.cs" />
+    <Compile Include="Core\CachingSimolTest.cs" />
+    <Compile Include="Core\DecoratingSavantTest.cs" />
+    <Compile Include="Core\MappingUtilsTest.cs" />
+    <Compile Include="Core\DomainCreatingSavantTest.cs" />
+    <Compile Include="Formatters\PropertyFormatterTest.cs" />
+    <Compile Include="Security\AesEncryptorTest.cs" />
+    <Compile Include="SimolClientTest.cs" />
+    <Compile Include="System\ConsistencySystemTest.cs" />
+    <Compile Include="System\FullTextTestItem.cs" />
+    <Compile Include="System\ReliableWriteSystemTest.cs" />
+    <Compile Include="System\FullTextSystemTest.cs" />
+    <Compile Include="System\CoreSystemTest.cs" />
+    <Compile Include="System\SystemTestUtils.cs" />
+    <Compile Include="TestSupport\A.cs" />
+    <Compile Include="TestSupport\B.cs" />
+    <Compile Include="TestSupport\C.cs" />
+    <Compile Include="CustomFormatAttributeTest.cs" />
+    <Compile Include="TestSupport\A2.cs" />
+    <Compile Include="TestSupport\H.cs" />
+    <Compile Include="TestSupport\D.cs" />
+    <Compile Include="Core\TypeItemMappingTest.cs" />
+    <Compile Include="TestSupport\E.cs" />
+    <Compile Include="TestSupport\F.cs" />
+    <Compile Include="Formatters\NumberFormatterTest.cs" />
+    <Compile Include="SelectCommandTest.cs" />
+    <Compile Include="SelectResultsTest.cs" />
+    <Compile Include="Core\SimpleDbSavantTest.cs" />
+    <Compile Include="System\SystemTestItem.cs" />
+    <Compile Include="TestSupport\TestDictionaryFormatter.cs" />
+    <Compile Include="TestSupport\TestDomainConstraint.cs" />
+    <Compile Include="TestSupport\TestIntFormatter.cs" />
+    <Compile Include="TestSupport\TestItemBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="App.config.template" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>ECHO F | XCOPY /D /Y "$(ProjectDir)App.config.template" "$(ProjectDir)App.config"</PreBuildEvent>
+  </PropertyGroup>
+</Project>

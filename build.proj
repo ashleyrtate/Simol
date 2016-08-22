@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project InitialTargets="" 
+		DefaultTargets="Rebuild"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <!-- 
+	Release build checklist:
+		* Manually run tests in Visual Studio
+		* Manually generate and check NCover report
+		* Change release version in AssemblyInfo.cs, Help project, and build.proj
+		* Check in all files and create SVN tag for new version
+		* Run build script with release.rsp
+		* Upload release zip to Codeplex
+		* Upload Web API docs in "\package\Simol-v1.0.0\Docs\Web\" to "http://ashleytate.s3.amazonaws.com/simol/api/"
+	-->		 
+		 
+    <!-- 
+	Define global build properties and provide default values where necessary. 
+	-->
+    <PropertyGroup>
+		<Configuration>RELEASE</Configuration>
+		<SimolVersion>v1.0.0</SimolVersion>
+		<BuildPath>$(MSBuildProjectDirectory)\build\</BuildPath>
+		<PackageRoot>$(MSBuildProjectDirectory)\package\</PackageRoot>
+		<PackagePath>$(PackageRoot)Simol-$(SimolVersion)\</PackagePath>
+		<WebDocPath>$(PackagePath)Docs\Web\</WebDocPath>
+		<PackageZipFile>$(PackageRoot)\Simol-$(SimolVersion).zip</PackageZipFile>	
+		<!-- Forces MSBuildCommunity project to use build files in Simol project -->
+		<MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\lib\</MSBuildCommunityTasksPath>
+    </PropertyGroup>
+
+	<Import Project="$(MSBuildProjectDirectory)\lib\MSBuild.Community.Tasks.Targets"/>
+	
+    <Target Name="Rebuild" >
+		<RemoveDir Directories="$(MSBuildProjectDirectory)\build\" />
+		<ItemGroup>
+			<Solutions Include="$(MSBuildProjectDirectory)\src\Simol.sln" />
+		</ItemGroup>
+		<MSBuild Projects="@(Solutions)"
+                 StopOnFirstFailure="true"
+                 Targets="Rebuild" />
+    </Target>
+
+    <Target Name="Release"
+            DependsOnTargets="Refresh;Rebuild;GenDoc;Package">
+    </Target>
+
+    <Target Name="Refresh" >
+        <SvnUpdate LocalPath="$(MSBuildProjectDirectory)" />
+    </Target>
+
+    <Target Name="Package" >
+		<RemoveDir Directories="$(MSBuildProjectDirectory)\package\" />
+		
+		<ItemGroup>
+			<ExampleProject Include="$(MSBuildProjectDirectory)\src\Simol.Examples\**\*.cs" />
+			<ExampleProject Include="$(MSBuildProjectDirectory)\src\Simol.Examples\**\*.template" />
+        </ItemGroup>
+        <Copy SourceFiles="@(ExampleProject)"
+				DestinationFiles="@(ExampleProject->'$(PackagePath)\Examples\%(RecursiveDir)%(Filename)%(Extension)')" />	
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\Readme.txt"
+				DestinationFolder="$(PackagePath)" />	
+				
+		<ItemGroup>
+			<WebDocFiles Include="$(BuildPath)doc\**\*.*" Exclude="$(BuildPath)doc\**\*.chm;$(BuildPath)doc\**\*.log" />
+        </ItemGroup>	
+        <Copy SourceFiles="@(WebDocFiles)"
+				DestinationFiles="@(WebDocFiles->'$(WebDocPath)%(RecursiveDir)%(Filename)%(Extension)')" />	
+		
+		<!-- Some files need to be renamed for Web docs to work on case-sensitive Web servers. -->
+		<Exec Command="ren $(WebDocPath)styles\Presentation.css presentation.css"  />
+		<Exec Command="ren $(WebDocPath)icons\CopyCode.gif copycode.gif"  />
+		
+		<ItemGroup>
+			<MSHelpDocFiles Include="$(BuildPath)doc\*.chm" />
+        </ItemGroup>	
+        <Copy SourceFiles="@(MSHelpDocFiles)"
+				DestinationFolder="$(PackagePath)Docs\" />					
+				
+		<ItemGroup>
+			<BinFiles Include="$(BuildPath)bin\**\*.*" />
+        </ItemGroup>	
+        <Copy SourceFiles="@(BinFiles)"
+				DestinationFolder="$(PackagePath)Bin" />				
+				
+		<ItemGroup>
+            <ZipFiles Include="$(PackagePath)**\*.*" />
+        </ItemGroup>
+		<MSBuild.Community.Tasks.Zip WorkingDirectory="$(PackageRoot)" 
+									 Files="@(ZipFiles)" 
+									 ZipFileName="$(PackageZipFile)"  />				
+    </Target>
+	
+	<Target Name="GenDoc"
+            DependsOnTargets="Rebuild">
+		<ItemGroup>
+			<Solutions Include="$(MSBuildProjectDirectory)\doc\Simol.shfbproj" />
+		</ItemGroup>
+		<MSBuild Projects="@(Solutions)"
+		 StopOnFirstFailure="true"/>	
+    </Target>
+
+</Project>

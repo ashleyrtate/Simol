@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EC218618-2C5D-4DCE-BA44-5270C36651AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Simol</RootNamespace>
+    <AssemblyName>Simol</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\SimpleSavant.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\Simol.xml</DocumentationFile>
+    <NoWarn>618</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Release\Simol.xml</DocumentationFile>
+    <NoWarn>618</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK, Version=1.2.0.2, Culture=neutral, PublicKeyToken=cd2d24cd2bace800, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\AWSSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Coditate.Common, Version=2009.3.14.460, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Coditate.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=2.0.0.4, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Async\AsyncExtensions.cs" />
+    <Compile Include="AttributeNameAttribute.cs" />
+    <Compile Include="Cache\CacheUtils.cs" />
+    <Compile Include="CommandParameter.cs" />
+    <Compile Include="AttributeMapping.cs" />
+    <Compile Include="Consistency\VersioningUtils.cs" />
+    <Compile Include="Consistency\ConsistentReadScope.cs" />
+    <Compile Include="Core\ConsistentSimpleDB.cs" />
+    <Compile Include="Consistency\DomainConstraintBase.cs" />
+    <Compile Include="Consistency\NoOpConstraint.cs" />
+    <Compile Include="Consistency\ReliableWriteScope.cs" />
+    <Compile Include="Consistency\WriteMonitor.cs" />
+    <Compile Include="ConstraintAttribute.cs" />
+    <Compile Include="Core\ConstrainingSimol.cs" />
+    <Compile Include="Core\DecoratingSimpleDB.cs" />
+    <Compile Include="Core\ListUtils.cs" />
+    <Compile Include="Core\SpanUtils.cs" />
+    <Compile Include="Data\ReliableWriteStep.cs" />
+    <Compile Include="Data\SimpleDBRequestFormatter.cs" />
+    <Compile Include="Data\SystemData.cs" />
+    <Compile Include="Formatters\ByteArrayFormatter.cs" />
+    <Compile Include="IDomainConstraint.cs" />
+    <Compile Include="Core\MappingBuilder.cs" />
+    <Compile Include="Security\IEncryptor.cs" />
+    <Compile Include="Indexing\IndexBuilder.cs" />
+    <Compile Include="Security\AesEncryptor.cs" />
+    <Compile Include="SelectUtils.cs" />
+    <Compile Include="SimolAttribute.cs" />
+    <Compile Include="SimolConfig.cs" />
+    <Compile Include="SimolConfigurationException.cs" />
+    <Compile Include="SimolDataException.cs" />
+    <Compile Include="SimolException.cs" />
+    <Compile Include="SimolExcludeAttribute.cs" />
+    <Compile Include="SimolFormatAttribute.cs" />
+    <Compile Include="SimolIncludeAttribute.cs" />
+    <Compile Include="VersionAttribute.cs" />
+    <Compile Include="Data\IndexState.cs" />
+    <Compile Include="IndexAttribute.cs" />
+    <Compile Include="Indexing\DomainCrawler.cs" />
+    <Compile Include="Indexing\IIndexer.cs" />
+    <Compile Include="Indexing\IndexValues.cs" />
+    <Compile Include="Indexing\LuceneIndexer.cs" />
+    <Compile Include="SpanAttribute.cs" />
+    <Compile Include="Core\ISimolInternal.cs" />
+    <Compile Include="ItemMapping.cs" />
+    <Compile Include="Core\MappingUtils.cs" />
+    <Compile Include="Cache\SimpleCache.cs" />
+    <Compile Include="Core\CachingSimol.cs" />
+    <Compile Include="Core\DecoratingSimol.cs" />
+    <Compile Include="Core\DomainCreatingSimol.cs" />
+    <Compile Include="Core\SimpleDbSimol.cs" />
+    <Compile Include="Core\ValuesAttributeMapping.cs" />
+    <Compile Include="Core\ValuesItemMapping.cs" />
+    <Compile Include="CustomFormatAttribute.cs" />
+    <Compile Include="Formatters\TimeSpanFormatter.cs" />
+    <Compile Include="Formatters\DateFormatter.cs" />
+    <Compile Include="Formatters\CustomFormatter.cs" />
+    <Compile Include="Cache\IItemCache.cs" />
+    <Compile Include="Core\TypeItemMapping.cs" />
+    <Compile Include="DomainNameAttribute.cs" />
+    <Compile Include="Formatters\EnumFormatter.cs" />
+    <Compile Include="Formatters\FormatterBase.cs" />
+    <Compile Include="Formatters\GuidFormatter.cs" />
+    <Compile Include="ISimol.cs" />
+    <Compile Include="ItemNameAttribute.cs" />
+    <Compile Include="ITypeFormatter.cs" />
+    <Compile Include="NumberFormatAttribute.cs" />
+    <Compile Include="Formatters\NumberFormatter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Core\TypeAttributeMapping.cs" />
+    <Compile Include="Formatters\PropertyFormatter.cs" />
+    <Compile Include="PropertyValues.cs" />
+    <Compile Include="SelectCommandGeneric.cs" />
+    <Compile Include="SelectCommand.cs" />
+    <Compile Include="SelectResults.cs" />
+    <Compile Include="SimolClient.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(TargetDir)*.dll" "$(SolutionDir)..\build\bin\" /S /I /R /Y
+XCOPY "$(TargetDir)*.xml" "$(SolutionDir)..\build\bin\" /S /I /R /Y
+
+REM Lucene.NET 2.4 pulls in SharpZip but we don't actually need do distribute it
+DEL  "$(SolutionDir)..\build\bin\ICSharpCode.SharpZipLib.dll"</PostBuildEvent>
+  </PropertyGroup>
+</Project>
