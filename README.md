@@ -18,4 +18,4 @@ Simol - The advanced .NET API for Amazon SimpleDB
 - Automatic domain creation
 - Compatible with .NET 3.5 and higher
 
-API documentation and additional information available at: http://simol.codeplex.com/
+**API documentation and additional information available at: http://simol.codeplex.com/**
